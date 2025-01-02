@@ -14,12 +14,13 @@ class SquareTakeHomeApplication: Application(), ImageLoaderFactory {
         return ImageLoader.Builder(this)
             .memoryCache{
                 MemoryCache.Builder(this)
-                    .maxSizePercent(0.10)
+                    .maxSizePercent(0.20)
                     .build()
             }
             .diskCache {
                 DiskCache.Builder()
-                    .maxSizeBytes(1024 * 1024 * 100)
+                    .directory(cacheDir.resolve("image_cache"))
+                    .maxSizeBytes(1024 * 1024 * 10)
                     .build()
             }
             .respectCacheHeaders(false)

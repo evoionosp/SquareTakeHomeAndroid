@@ -22,6 +22,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
+import coil.request.CachePolicy
 import coil.request.ImageRequest
 import com.example.squaretakehome.R
 
@@ -36,9 +37,15 @@ fun EmployeeItem(employee: Employee) {
         AsyncImage(
             model = ImageRequest.Builder(LocalContext.current)
                 .data(employee.photoUrl)
+                .memoryCacheKey(employee.photoUrl)
+                .diskCacheKey(employee.photoUrl)
+                .placeholder(R.drawable.baseline_person_64)
+                .error(R.drawable.baseline_person_64)
+                .fallback(R.drawable.baseline_person_64)
+                .diskCachePolicy(CachePolicy.ENABLED)
+                .memoryCachePolicy(CachePolicy.ENABLED)
                 .crossfade(true)
                 .build(),
-            placeholder = painterResource(R.drawable.baseline_person_64),
             contentDescription = "Employee Photo",
             contentScale = ContentScale.Crop,
             modifier = Modifier
